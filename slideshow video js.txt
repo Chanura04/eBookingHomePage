@@ -1,0 +1,54 @@
+ <div class="slideshow-container">
+        <video id="videoPlayer" autoplay muted playsinline disablePictureInPicture>
+          <source src="Avatar 3 (1).mp4" type="video/mp4">
+          <source src="Avatar 3 (2).mp4" type="video/mp4">
+          <source src="Avatar 3 (3).mp4" type="video/mp4">
+          <source src="Avatar 3 (4).mp4" type="video/mp4">
+      </video>
+        <button id="prevBtn">Previous</button>
+        <button id="nextBtn">Next</button>
+    </div>
+
+    <script  >
+      // List of video files
+const videos = [
+    "Avatar 3 (1).mp4",
+    "Avatar 3 (2).mp4",
+    "Avatar 3 (3).mp4",
+    "Avatar 3 (4).mp4"
+];
+
+let currentIndex = 0;
+const videoPlayer = document.getElementById("videoPlayer");
+
+// Function to change video
+function changeVideo(index) {
+    if (index >= videos.length) {
+        index = 0; // Loop back to the first video
+    } else if (index < 0) {
+        index = videos.length - 1; // Go to the last video
+    }
+
+    currentIndex = index;
+    videoPlayer.src = videos[currentIndex]; 
+    videoPlayer.play(); // Auto-play the new video
+}
+
+// Load the first video
+changeVideo(currentIndex);
+
+// Move to next video when current video ends
+videoPlayer.addEventListener("ended", () => {
+    changeVideo(currentIndex + 1);
+});
+
+// Buttons for manual navigation
+document.getElementById("nextBtn").addEventListener("click", () => {
+    changeVideo(currentIndex + 1);
+});
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+    changeVideo(currentIndex - 1);
+});
+
+    </script>
